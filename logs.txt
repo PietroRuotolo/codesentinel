@@ -1,0 +1,7 @@
+[ERRO] java.lang.NullPointerException: Não foi possível acessar o objeto 'Player', pois ele é nulo.
+[ERRO] java.lang.IllegalArgumentException: O nível informado deve ser maior que zero.
+[ERRO] java.lang.IllegalStateException: O jogo já foi iniciado.
+[ERRO] java.lang.IndexOutOfBoundsException: Índice 5 fora dos limites da lista de jogadores.
+[ERRO] java.lang.ArrayIndexOutOfBoundsException: Índice 10 fora dos limites do vetor.
+[ERRO] java.lang.NumberFormatException: Não foi possível converter "abc" para um número inteiro.
+[ERRO] java.lang.ClassCastException: Não foi possível converter GameAction para Player.
