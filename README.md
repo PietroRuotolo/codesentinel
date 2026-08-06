@@ -21,18 +21,7 @@
 A ideia nasceu de uma dor real: times pequenos gastam horas lendo *stack traces* repetidos. O CodeSentinel faz a primeira leitura por você.
 
 >  **Projeto de estudo**, construído para aprofundar **Java + Spring AI + automação**. Não é um produto de produção.
- 
----
 
-##  Demonstração
-
->  _Adicione aqui um GIF do fluxo funcionando: um erro chegando na API → o diagnóstico gerado pela IA → a issue aberta no GitHub._
->
-> _Dica: grave a tela com o [ScreenToGif](https://www.screentogif.com/) e arraste o arquivo direto para esta seção no editor do GitHub._
-
-<div align="center">
-<img src="docs/demo.gif" alt="Demonstração do CodeSentinel" width="720"/>
-</div>
 ---
 
 ## Funcionalidades
@@ -157,20 +146,7 @@ Resposta:
 ```
 
 Os testes de integração usam **Testcontainers** para subir um PostgreSQL real em container, garantindo que a persistência seja validada contra um banco de verdade — não um mock.
- 
----
 
-##  Roadmap
-
-- [x] Ingestão de erros via API REST
-- [x] Persistência com PostgreSQL + *migrations*
-- [x] Diagnóstico por LLM via Spring AI
-- [ ] Abertura automática de issues (*tool calling*)
-- [ ] *Dashboard* web para visualizar o histórico
-- [ ] Agrupamento de erros recorrentes
-- [ ] Deploy em nuvem
-> Marque as caixas conforme cada parte fica pronta — isso mostra progresso real para quem visita o repositório.
- 
 ---
 
 ##  Autor
