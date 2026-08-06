@@ -2,7 +2,7 @@
 [ERRO] java.lang.IllegalArgumentException: O nível informado deve ser maior que zero.
 ERRO java.lang.IllegalStateException: O jogo já foi iniciado.
 [INFO] Arquivo de configuração localizado.
-[INFO] Conexão estabelecida com o banco de dados.
+[INF] Conexão estabelecida com o banco de dados.
 [INFO] Serviço iniciado na porta 8080.
 [ERRO] java.lang.IndexOutOfBoundsException: Índice 5 fora dos limites da lista de jogadores.
 [ERROjava.lang.ArrayIndexOutOfBoundsException: Índice 10 fora dos limites do vetor.
