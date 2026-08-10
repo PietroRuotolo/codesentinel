@@ -3,47 +3,38 @@ import java.util.Optional;
 enum LogTypes{
     ERRO,
     INFO,
-    DEBUG
-}
+    DEBUG;
 
-public class LogEntry {
-    private String level;
-    private String message;
-
-    public LogEntry(String level, String message) {
-        this.level = level;
-        this.message = message;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public static Optional<LogEntry> from(String line){
-        int index = line.indexOf("]") + 1;
-        LogEntry entry = null;
-        if(line.startsWith("[") && line.contains("]")){
-            String levelName = line.substring(line.indexOf("[") + 1, line.indexOf("]"));
-            for(var type : LogTypes.values()){
-                if(levelName.equalsIgnoreCase(type.toString())){
-                    entry = new LogEntry(line.substring(0, index), line.substring(index));
-                    break;
-                }
+    public static Optional<LogTypes> parse(String str){
+        for(var log : LogTypes.values()){
+            if(str.equalsIgnoreCase(log.toString())){
+                return Optional.of(log);
             }
         }
-        return Optional.ofNullable(entry);
+        return Optional.empty();
+    }
+}
+
+public record LogEntry(LogTypes level, String message) {
+
+    public static Optional<LogEntry> from(String line) {
+        if (line.startsWith("[") && line.contains("]")) {
+            String levelName = line.substring(line.indexOf("[") + 1, line.indexOf("]"));
+            int index = line.indexOf("]") + 1;
+            String message = line.substring(index);
+
+            return LogTypes.parse(levelName)
+                    .map(l -> new LogEntry(l, message));
+        }
+        return Optional.empty();
     }
 
-    public boolean isError(){
-        return "[ERRO]".equals(level);
+    public boolean isError() {
+        return LogTypes.ERRO.equals(level);
     }
 
     @Override
     public String toString() {
-        return "%s %s".formatted(level, message);
+        return "[%s] %s".formatted(level, message);
     }
 }
