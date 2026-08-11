@@ -1,3 +1,8 @@
+package com.pietro.codesentinel;
+
+import com.pietro.codesentinel.model.LogEntry;
+import com.pietro.codesentinel.model.LogTypes;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
