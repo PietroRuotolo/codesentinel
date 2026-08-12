@@ -4,6 +4,8 @@ import com.pietro.codesentinel.model.LogEntry;
 import com.pietro.codesentinel.model.LogTypes;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,6 +45,7 @@ public class LogAnalyzer {
         Map<String, Long> exceptions = groupExceptions(errorList);
         printLog(errorList, exceptions ,LogTypes.ERRO);
         printLogInfo(errorList.size(), logEntryList.size(), badFormatCount);
+        exportToCsv(exceptions);
     }
 
     public void printLog(List<LogEntry> logEntryList, Map<String, Long> logMap ,LogTypes header){
@@ -61,8 +64,22 @@ public class LogAnalyzer {
     }
 
     public void printLogInfo(long errorCounter, int lineCounter, int badFormatCount){
-
         System.out.printf("It was found a total of %d errors in %d lines.%nA total of %d lines could not been read.%n",
                 errorCounter, lineCounter, badFormatCount);
+    }
+
+    public void exportToCsv(Map<String, Long> logMap){
+        try(FileWriter fw = new FileWriter("logdata.csv");
+            BufferedWriter bw = new BufferedWriter(fw)){
+                bw.write("exception_type,count");
+                bw.newLine();
+                for(var entry : logMap.entrySet()){
+                    bw.write(entry.getKey() + "," + entry.getValue());
+                    bw.newLine();
+                }
+            System.out.println("Map saved with success!");
+        }catch (IOException e){
+            System.err.println("Geral error in the file: " + e.getMessage());
+        }
     }
 }
