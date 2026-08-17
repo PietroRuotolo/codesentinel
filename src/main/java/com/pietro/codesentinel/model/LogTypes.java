@@ -2,7 +2,7 @@ package com.pietro.codesentinel.model;
 
 import java.util.Optional;
 
-public enum LogTypes{
+public enum LogTypes {
     ERRO,
     INFO,
     DEBUG;
