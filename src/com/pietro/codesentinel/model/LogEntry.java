@@ -37,4 +37,19 @@ public record LogEntry(LogTypes level, String message) {
     public String toString() {
         return "[%s] %s".formatted(level, message);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LogEntry logEntry = (LogEntry) o;
+        return level() == logEntry.level() && message().equals(logEntry.message());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = level().hashCode();
+        result = 31 * result + message().hashCode();
+        return result;
+    }
 }

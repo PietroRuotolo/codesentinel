@@ -59,17 +59,19 @@ public class LogAnalyzer {
 
         System.out.println("More Details: ");
         System.out.println("-".repeat(30));
-        logMap.forEach((k,v) -> System.out.println(k + " : " + v));
+        logMap.entrySet().stream()
+                .sorted(Comparator.comparing(Map.Entry<String, Long>::getValue).reversed())
+                .forEach((entry) -> System.out.println(entry.getKey() + ":" + entry.getValue()));
         System.out.println("-".repeat(30));
     }
 
     public void printLogInfo(long errorCounter, int lineCounter, int badFormatCount){
-        System.out.printf("It was found a total of %d errors in %d lines.%nA total of %d lines could not been read.%n",
+        System.out.printf("It was found a total of %d errors in %d lines.%nA total of %d lines couldn't been read.%n",
                 errorCounter, lineCounter, badFormatCount);
     }
 
     public void exportToCsv(Map<String, Long> logMap){
-        try(FileWriter fw = new FileWriter("logdata.csv");
+        try(FileWriter fw = new FileWriter("analise/logdata.csv");
             BufferedWriter bw = new BufferedWriter(fw)){
                 bw.write("exception_type,count");
                 bw.newLine();
