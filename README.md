@@ -206,6 +206,6 @@ Cada capacidade será incorporada quando estiver de fato implementada. Este docu
 **Pietro Ruotolo** — estudante de Engenharia de Software (FIAP), com foco em backend Java.
 
 [![GitHub](https://img.shields.io/badge/GitHub-PietroRuotolo-181717?style=flat&logo=github)](https://github.com/PietroRuotolo)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-pietro--ruotolo-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/pietro-ruotolo)
+[![LinkedIn](https://www.linkedin.com/in/pietro-ruotolo-180229341/)
 
 </div>
