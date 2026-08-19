@@ -1,0 +1,50 @@
+[ERRO] Falha crítica: sistema travou
+[ERRO] java.lang.NullPointerException: Não foi possível acessar o objeto 'Player', pois ele é nulo.
+[ERRO] java.lang.IllegalArgumentException: O nível informado deve ser maior que zero.
+ERRO java.lang.IllegalStateException: O jogo já foi iniciado.
+[INFO] Arquivo de configuração localizado.
+[INF] Conexão estabelecida com o banco de dados.
+[INFO] Serviço iniciado na porta 8080.
+[ERRO] java.lang.IndexOutOfBoundsException: Índice 5 fora dos limites da lista de jogadores.
+[ERROjava.lang.ArrayIndexOutOfBoundsException: Índice 10 fora dos limites do vetor.
+[DEBUG] Coleta de métricas concluída.
+[DEBUG] Liberando recursos da aplicação.
+[ERRO] java.lang.NumberFormatException: Não foi possível converter "abc" para um número inteiro.
+ERRO | java.lang.ClassCastException: Não foi possível converter GameAction para Player.
+[ERRO] java.lang.NullPointerException: Jogador não encontrado.
+[ERRO] java.lang.IndexOutOfBoundsException: Índice 5 fora dos limites da lista de jogadores.
+[ERRO] java.lang.IllegalArgumentException: Valor de dano não pode ser negativo.
+[ERRO] java.lang.NumberFormatException: Não foi possível converter "abc" para número.
+[ERRO] java.util.NoSuchElementException: Nenhum jogador encontrado.
+[ERRO] java.lang.ArithmeticException: Divisão por zero.
+[ERRO] java.lang.IllegalStateException: O jogador já está conectado ao servidor.
+[ERRO] java.lang.ClassCastException: Não foi possível converter o objeto para Player.
+[ERRO] java.lang.ArrayIndexOutOfBoundsException: Índice 12 fora dos limites do inventário.
+[ERRO] java.lang.StringIndexOutOfBoundsException: Índice 15 fora dos limites da mensagem.
+[ERRO] java.io.IOException: Falha ao carregar os dados do jogador.
+[ERRO] java.sql.SQLException: Não foi possível acessar o banco de dados.
+[ERRO] java.net.ConnectException: Não foi possível conectar ao servidor.
+[ERRO] java.util.ConcurrentModificationException: A lista de jogadores foi modificada durante a iteração.
+[ERRO] java.lang.UnsupportedOperationException: Esta operação não é suportada pelo inventário.
+[ERRO] java.lang.SecurityException: Permissão insuficiente para executar esta operação.
+[ERRO] java.util.InputMismatchException: Entrada inválida para o valor esperado.
+[ERRO] java.lang.StackOverflowError: Profundidade máxima de chamadas excedida.
+[ERRO] java.lang.OutOfMemoryError: Memória insuficiente para carregar os recursos.
+[ERRO] java.lang.IllegalStateException: Não é possível iniciar a partida enquanto houver jogadores desconectados.
+[ERRO] java.lang.NullPointerException: O inventário do jogador não foi inicializado.
+[ERRO] java.lang.IllegalArgumentException: O nível do jogador não pode ser menor que zero.
+[ERRO] java.lang.IndexOutOfBoundsException: Índice 14 fora dos limites da lista de missões.
+[ERRO] java.util.NoSuchElementException: Nenhuma recompensa disponível para esta missão.
+[ERRO] java.lang.ArithmeticException: Não foi possível calcular a média com divisor igual a zero.
+[ERRO] java.lang.IllegalStateException: A partida já foi encerrada.
+[ERRO] java.lang.NumberFormatException: Não foi possível converter "25O" para inteiro.
+[ERRO] java.lang.ArrayIndexOutOfBoundsException: Índice 9 fora dos limites do inventário.
+[ERRO] java.lang.StringIndexOutOfBoundsException: Índice 21 fora dos limites do nome do jogador.
+[ERRO] java.lang.ClassCastException: O objeto recebido não é uma instância válida de Player.
+[ERRO] java.io.IOException: Falha ao salvar o progresso do jogador.
+[ERRO] java.sql.SQLException: Falha ao executar consulta de jogadores.
+[ERRO] java.net.ConnectException: Não foi possível estabelecer conexão com o servidor.
+[ERRO] java.util.ConcurrentModificationException: A lista de inimigos foi alterada durante a iteração.
+[ERRO] java.lang.UnsupportedOperationException: Não é possível remover itens deste inventário.
+[ERRO] java.lang.SecurityException: O jogador não possui permissão para executar este comando.
+[ERRO] java.util.InputMismatchException: O valor informado não corresponde ao tipo esperado.
