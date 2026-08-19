@@ -2,17 +2,39 @@ package com.pietro.codesentinel.service;
 
 import com.pietro.codesentinel.model.LogEntry;
 import com.pietro.codesentinel.model.LogTypes;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
 public class LogAnalyzer {
 
     private final List<LogEntry> logEntryList = new ArrayList<>();
+
+    public Map<String, Long> analyzeFile(String path){
+        Resource resource = new ClassPathResource(path);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))) {
+            String line;
+            while((line = br.readLine()) != null){
+                Optional<LogEntry> optionalLogEntry = LogEntry.from(line);
+                optionalLogEntry.ifPresent(this::saveLog);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<LogEntry> errorList = logEntryList.stream()
+                .filter(LogEntry::isError)
+                .toList();
+        return groupExceptions(errorList);
+    }
 
     public void saveLog(LogEntry entry){
         logEntryList.add(entry);
@@ -23,51 +45,6 @@ public class LogAnalyzer {
                  .map(LogEntry::getExceptionType)
                  .flatMap(Optional::stream)
                  .collect(Collectors.groupingBy(type -> type, Collectors.counting()));
-    }
-
-    public void filterByError(BufferedReader br) throws IOException {
-        String line;
-        LogEntry entry;
-        int badFormatCount = 0;
-        while ((line = br.readLine()) != null){
-            Optional<LogEntry> optionalEntry = LogEntry.from(line);
-            if(optionalEntry.isPresent()){
-                entry = optionalEntry.get();
-                saveLog(entry);
-            }else{
-                System.err.println("Bad log format");
-                badFormatCount++;
-            }
-        }
-
-        List<LogEntry> errorList = logEntryList.stream().filter(LogEntry::isError)
-                .toList();
-        Map<String, Long> exceptions = groupExceptions(errorList);
-        printLog(errorList, exceptions ,LogTypes.ERRO);
-        printLogInfo(errorList.size(), logEntryList.size(), badFormatCount);
-        exportToCsv(exceptions);
-    }
-
-    public void printLog(List<LogEntry> logEntryList, Map<String, Long> logMap ,LogTypes header){
-
-        System.out.println("-".repeat(30));
-        System.out.println("LOG LIST");
-        System.out.println("TYPE: " + "[" + header + "]");
-        System.out.println("-".repeat(30));
-        logEntryList.forEach(System.out::println);
-        System.out.println("-".repeat(30));
-
-        System.out.println("More Details: ");
-        System.out.println("-".repeat(30));
-        logMap.entrySet().stream()
-                .sorted(Comparator.comparing(Map.Entry<String, Long>::getValue).reversed())
-                .forEach((entry) -> System.out.println(entry.getKey() + ":" + entry.getValue()));
-        System.out.println("-".repeat(30));
-    }
-
-    public void printLogInfo(long errorCounter, int lineCounter, int badFormatCount){
-        System.out.printf("It was found a total of %d errors in %d lines.%nA total of %d lines couldn't been read.%n",
-                errorCounter, lineCounter, badFormatCount);
     }
 
     public void exportToCsv(Map<String, Long> logMap){
