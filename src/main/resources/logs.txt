@@ -1,4 +1,4 @@
-[ERRO] Falha crítica: sistema travou
+[ERRO] Falha crítica: sistema travou.
 [ERRO] java.lang.NullPointerException: Não foi possível acessar o objeto 'Player', pois ele é nulo.
 [ERRO] java.lang.IllegalArgumentException: O nível informado deve ser maior que zero.
 ERRO java.lang.IllegalStateException: O jogo já foi iniciado.
