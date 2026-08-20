@@ -1,8 +1,9 @@
 package com.pietro.codesentinel.controller;
 
 import com.pietro.codesentinel.service.LogAnalyzer;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -15,8 +16,13 @@ public class LogController {
         this.logAnalyzer = logAnalyzer;
     }
 
-    @GetMapping("/analyze")
-    public Map<String, Long> getAnalysis(){
-        return logAnalyzer.analyzeFile("logs.txt");
+    @GetMapping("/analyzes")
+    public Map<String, Long> getLogs(){
+        return logAnalyzer.analyzeErrors("logs.txt");
+    }
+
+    @PostMapping("/logs")
+    public Map<String, Long> postLogs(@RequestBody String logData){
+        return logAnalyzer.analyzeErrors(logData);
     }
 }
