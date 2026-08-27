@@ -1,17 +1,59 @@
 package com.pietro.codesentinel.model;
 
+import jakarta.persistence.*;
+
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public record LogEntry(LogTypes level, String message) {
+@Entity
+public class LogEntry {
 
-    public static Optional<LogEntry> from(String line) {
-        if (line.startsWith("[") && line.contains("]")) {
-            int index = line.indexOf("]");
-            String levelName = line.substring(line.indexOf("[") + 1, index);
-            String message = line.substring(index + 1);
-            return LogTypes.parse(levelName)
-                    .map(l -> new LogEntry(l, message));
+    @Id @GeneratedValue() @Column(name = "id")
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private LogTypes level;
+
+    private String message;
+
+    private OffsetDateTime logDate;
+
+    public LogEntry() {}
+
+    public LogEntry(LogTypes level, String message, OffsetDateTime logDate) {
+        this.level = level;
+        this.message = message;
+        this.logDate = logDate;
+    }
+
+    public static Optional<LogEntry> from(String line){
+        String regex =
+                "^(?:\\[)?([^\\]]+)(?:\\])?\\s+" +
+                "(?:\\[)?(INFO|DEBUG|ERROR|WARN)(?:\\])?\\s+" +
+                "(.+)$";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(line);
+
+        if(matcher.matches()){
+            String timestamp = matcher.group(1);
+            Optional<LogTypes> level = LogTypes.parse(matcher.group(2));
+            String message = matcher.group(3);
+
+            if(level.isPresent()){
+                OffsetDateTime formattedDate;
+                try{
+                    formattedDate = OffsetDateTime.parse(timestamp);
+                    return Optional.of(new LogEntry(level.get(), message, formattedDate));
+                }catch (DateTimeParseException e){
+                    System.err.println("Invalid date format: " + line);
+                }
+            }
         }
+        System.err.println("Invalid log Format from: " + line);
         return Optional.empty();
     }
 
@@ -30,26 +72,27 @@ public record LogEntry(LogTypes level, String message) {
 
 
     public boolean isError() {
-        return LogTypes.ERRO.equals(level);
+        return LogTypes.ERROR.equals(level);
     }
 
     @Override
     public String toString() {
-        return "[%s] %s".formatted(level, message);
+        return "[%s] %s %s".formatted(level, logDate ,message);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-
-        LogEntry logEntry = (LogEntry) o;
-        return level() == logEntry.level() && message().equals(logEntry.message());
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        int result = level().hashCode();
-        result = 31 * result + message().hashCode();
-        return result;
+    public LogTypes getLevel() {
+        return level;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public OffsetDateTime getLogDate() {
+        return logDate;
     }
 }

@@ -4,9 +4,10 @@ import java.util.Optional;
 
 
 public enum LogTypes {
-    ERRO,
+    ERROR,
     INFO,
-    DEBUG;
+    DEBUG,
+    WARN;
 
     public static Optional<LogTypes> parse(String str){
         for(var log : LogTypes.values()){
