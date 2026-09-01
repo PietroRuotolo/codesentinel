@@ -19,12 +19,13 @@ public class LogQueryService {
         this.logEntryRepository = logEntryRepository;
     }
 
-    public List<LogEntry> getLogs(LogType level, String message, OffsetDateTime logDate){
+    public List<LogEntry> getLogs(LogType level, String message, OffsetDateTime logDate, OffsetDateTime dateAfter, OffsetDateTime dateBefore){
 
-        Specification<LogEntry> spec = Specification.where(
-                LogEntrySpecification.hasLevel(level)
-                        .and(LogEntrySpecification.containsMessage(message)
-                                .and(LogEntrySpecification.hasDate(logDate))));
+        Specification<LogEntry> spec = Specification.allOf(
+                LogEntrySpecification.hasLevel(level),
+                LogEntrySpecification.containsMessage(message),
+                LogEntrySpecification.dateAfter(dateAfter),
+                LogEntrySpecification.dateBefore(dateBefore));
 
         return logEntryRepository.findAll(spec);
     }

@@ -4,6 +4,7 @@ import com.pietro.codesentinel.model.LogEntry;
 import com.pietro.codesentinel.model.LogType;
 import com.pietro.codesentinel.service.LogAnalyzer;
 import com.pietro.codesentinel.service.LogQueryService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,11 @@ public class LogController {
     public ResponseEntity<List<LogEntry>> getLogs(
             @RequestParam(required = false) LogType level,
             @RequestParam(required = false) String message,
-            @RequestParam(required = false) OffsetDateTime logDate){
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime logDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime after,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime before){
 
-        return ResponseEntity.ok(logQueryService.getLogs(level, message, logDate));
+        return ResponseEntity.ok(logQueryService.getLogs(level, message, logDate, after, before));
 
     }
 

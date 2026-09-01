@@ -2,11 +2,13 @@ package com.pietro.codesentinel.specification;
 
 import com.pietro.codesentinel.model.LogEntry;
 import com.pietro.codesentinel.model.LogType;
+import jakarta.persistence.criteria.ParameterExpression;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -30,10 +32,17 @@ public class LogEntrySpecification{
         };
     }
 
-    public static Specification<LogEntry> hasDate(OffsetDateTime logDate){
+    public static Specification<LogEntry> dateAfter(OffsetDateTime logDate){
         return (root, query, criteriaBuilder) -> {
             if(logDate == null) return null;
-            return criteriaBuilder.equal(root.get("logDate"), logDate);
+            return criteriaBuilder.greaterThanOrEqualTo(root.get("logDate"), logDate);
+        };
+    }
+
+    public static Specification<LogEntry> dateBefore(OffsetDateTime logDate){
+        return (root, query, criteriaBuilder) -> {
+            if(logDate == null) return null;
+            return criteriaBuilder.lessThanOrEqualTo(root.get("logDate"), logDate);
         };
     }
 }
