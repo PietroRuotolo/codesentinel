@@ -3,14 +3,14 @@ package com.pietro.codesentinel.model;
 import java.util.Optional;
 
 
-public enum LogTypes {
+public enum LogType {
     ERROR,
     INFO,
     DEBUG,
     WARN;
 
-    public static Optional<LogTypes> parse(String str){
-        for(var log : LogTypes.values()){
+    public static Optional<LogType> parse(String str){
+        for(var log : LogType.values()){
             if(str.equalsIgnoreCase(log.toString())){
                 return Optional.of(log);
             }

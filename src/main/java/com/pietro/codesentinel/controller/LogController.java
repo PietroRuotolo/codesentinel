@@ -1,14 +1,13 @@
 package com.pietro.codesentinel.controller;
 
 import com.pietro.codesentinel.model.LogEntry;
-import com.pietro.codesentinel.repository.LogEntryRepository;
+import com.pietro.codesentinel.model.LogType;
 import com.pietro.codesentinel.service.LogAnalyzer;
 import com.pietro.codesentinel.service.LogQueryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +25,14 @@ public class LogController {
     }
 
     @GetMapping("/logs")
-    public List<LogEntry> getLogs(){return logQueryService.getLogs();}
+    public ResponseEntity<List<LogEntry>> getLogs(
+            @RequestParam(required = false) LogType level,
+            @RequestParam(required = false) String message,
+            @RequestParam(required = false) OffsetDateTime logDate){
+
+        return ResponseEntity.ok(logQueryService.getLogs(level, message, logDate));
+
+    }
 
     @PostMapping("/logs")
     public Map<String, Long> analyzeLogs(@RequestBody String logData){return logAnalyzer.analyzeErrors(logData);}

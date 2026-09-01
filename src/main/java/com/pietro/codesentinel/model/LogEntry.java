@@ -15,7 +15,7 @@ public class LogEntry {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private LogTypes level;
+    private LogType level;
 
     private String message;
 
@@ -23,7 +23,7 @@ public class LogEntry {
 
     public LogEntry() {}
 
-    public LogEntry(LogTypes level, String message, OffsetDateTime logDate) {
+    public LogEntry(LogType level, String message, OffsetDateTime logDate) {
         this.level = level;
         this.message = message;
         this.logDate = logDate;
@@ -40,7 +40,7 @@ public class LogEntry {
 
         if(matcher.matches()){
             String timestamp = matcher.group(1);
-            Optional<LogTypes> level = LogTypes.parse(matcher.group(2));
+            Optional<LogType> level = LogType.parse(matcher.group(2));
             String message = matcher.group(3);
 
             if(level.isPresent()){
@@ -72,7 +72,7 @@ public class LogEntry {
 
 
     public boolean isError() {
-        return LogTypes.ERROR.equals(level);
+        return LogType.ERROR.equals(level);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class LogEntry {
         return id;
     }
 
-    public LogTypes getLevel() {
+    public LogType getLevel() {
         return level;
     }
 
