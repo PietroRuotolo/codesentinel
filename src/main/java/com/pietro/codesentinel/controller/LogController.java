@@ -12,6 +12,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:5174/")
 @RestController
 public class LogController {
 
