@@ -7,6 +7,7 @@ import com.pietro.codesentinel.specification.LogEntrySpecification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class LogQueryService {
         this.logEntryRepository = logEntryRepository;
     }
 
-    public List<LogEntry> getLogs(LogType level, String message, OffsetDateTime logDate, OffsetDateTime dateAfter, OffsetDateTime dateBefore){
+    public List<LogEntry> getLogs(LogType level, String message, LocalDate dateAfter, LocalDate dateBefore){
 
         Specification<LogEntry> spec = Specification.allOf(
                 LogEntrySpecification.hasLevel(level),

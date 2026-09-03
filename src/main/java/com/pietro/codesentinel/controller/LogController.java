@@ -8,11 +8,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:5174/")
+@CrossOrigin(origins = "http://localhost:5173/")
 @RestController
 public class LogController {
 
@@ -30,11 +31,10 @@ public class LogController {
     public ResponseEntity<List<LogEntry>> getLogs(
             @RequestParam(required = false) LogType level,
             @RequestParam(required = false) String message,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime logDate,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime after,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime before){
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate after,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate before){
 
-        return ResponseEntity.ok(logQueryService.getLogs(level, message, logDate, after, before));
+        return ResponseEntity.ok(logQueryService.getLogs(level, message, after, before));
 
     }
 
