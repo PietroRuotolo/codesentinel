@@ -4,6 +4,7 @@ import com.pietro.codesentinel.model.LogEntry;
 import com.pietro.codesentinel.model.LogType;
 import com.pietro.codesentinel.repository.LogEntryRepository;
 import com.pietro.codesentinel.specification.LogEntrySpecification;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,6 @@ public class LogQueryService {
                 LogEntrySpecification.dateAfter(dateAfter),
                 LogEntrySpecification.dateBefore(dateBefore));
 
-        return logEntryRepository.findAll(spec);
+        return logEntryRepository.findAll(spec, Sort.by("logDate").descending());
     }
 }
