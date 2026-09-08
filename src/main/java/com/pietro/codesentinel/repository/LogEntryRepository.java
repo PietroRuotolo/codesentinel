@@ -13,7 +13,4 @@ import java.util.List;
 public interface LogEntryRepository extends JpaRepository<LogEntry, Long>, JpaSpecificationExecutor<LogEntry> {
 
     boolean existsByLogDateAndMessage(OffsetDateTime logDate, String message);
-
-    List<LogEntry> findByLevel(LogType level);
-
 }
