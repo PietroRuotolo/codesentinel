@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = {"http://localhost:5173/", "codesentinel-frontend.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:5173", "https://codesentinel-frontend.vercel.app"})
 @RestController
 public class LogController {
 
