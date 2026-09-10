@@ -4,8 +4,6 @@
  
 Demo ao vivo: https://codesentinel-frontend.vercel.app
 Repositório do front-end: https://github.com/PietroRuotolo/codesentinel-frontend
-
-Há um tempo de espera de 50s para o Back-end ligar
  
 ---
  
