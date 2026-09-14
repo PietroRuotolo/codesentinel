@@ -1,16 +1,17 @@
 package com.pietro.codesentinel.aicontroller;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AiController {
     private final ChatClient chatClient;
+    private final DiagnosisService diagnosisService;
 
-    public AiController(ChatClient.Builder builder) {
+    public AiController(ChatClient.Builder builder, DiagnosisService diagnosisService) {
+
         this.chatClient = builder.build();
+        this.diagnosisService = diagnosisService;
     }
 
     @GetMapping("/ai/test")
@@ -18,5 +19,9 @@ public class AiController {
         return chatClient.prompt().user(question).call().content();
     }
 
+    @PostMapping("/diagnose")
+    public String diagnose(@RequestBody String error){
+        return diagnosisService.diagnose(error);
+    }
 
 }
